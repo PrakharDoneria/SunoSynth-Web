@@ -46,6 +46,14 @@ const DashboardPage = () => {
         loadCredits();
     }, []);
 
+    useEffect(() => {
+        if (audioPath) {
+            audioRef.current.pause();
+            audioRef.current.currentTime = 0;
+            setIsPlaying(false);
+        }
+    }, [audioPath]);
+
     const loadCredits = async () => {
         try {
             const auth = getAuth();
@@ -70,6 +78,33 @@ const DashboardPage = () => {
             }
         } catch (error) {
             toast.error(`Error loading credits: ${error.message}`);
+        }
+    };
+
+    const deductCredits = async (amount) => {
+        try {
+            const auth = getAuth();
+            const user = auth.currentUser;
+            const baseUrl = process.env.NEXT_PUBLIC_SUNOSYNTH_API_URL;
+            const response = await fetch(`${baseUrl}/credits/deduce`, {
+                // Changed endpoint to /deduce
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ uid: user.uid, amount }), // Pass as JSON body
+            });
+            if (response.ok) {
+                const data = await response.json();
+                if (data.success) {
+                    setCredits(data.credits);
+                    loadCredits();
+                } else {
+                    toast.error(`Failed to deduct credits: ${data.message}`);
+                }
+            } else {
+                toast.error(`Failed to deduct credits: ${response.status}`);
+            }
+        } catch (error) {
+            toast.error(`Error deducting credits: ${error.message}`);
         }
     };
 
@@ -124,6 +159,7 @@ const DashboardPage = () => {
                 const blob = await response.blob();
                 const url = URL.createObjectURL(blob);
                 setAudioPath(url);
+                await deductCredits(10); // Deduct credits for music generation
                 toast.success("Music generated successfully! 🎵");
             } else {
                 const data = await response.json();
@@ -161,6 +197,7 @@ const DashboardPage = () => {
                 const data = await response.json();
                 setLyrics(data.response || "AI failed to generate lyrics.");
                 setLyricsCharacterCount(data.response.length || 0);
+                await deductCredits(5); // Deduct credits for lyrics generation
                 toast.success("AI Lyrics generated successfully! 🎶");
             } else {
                 const data = await response.json();
@@ -207,11 +244,7 @@ const DashboardPage = () => {
     };
 
     const downloadMusic = async () => {
-        if (!audioPath) {
-            toast.error("No music generated yet!");
-            return;
-        }
-
+        if (!audioPath || isLoading) return; // Prevent multiple downloads
         if (credits < 2) {
             toast.error("Not enough credits! You need 2 credits to download.");
             return;
@@ -225,6 +258,7 @@ const DashboardPage = () => {
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            await deductCredits(2); // Deduct credits for downloading music
             toast.success("Download started! Enjoy your music.");
         } catch (error) {
             toast.error(`Error downloading music: ${error.message}`);
@@ -420,60 +454,83 @@ const DashboardPage = () => {
                                             icon={faMusic}
                                             className="mr-2"
                                         />
-                                        Generate Music (10 Credits)
+                                        Generate Music
                                     </>
                                 )}
                             </button>
                         </div>
+
+                        {/* Audio Controls */}
                         {audioPath && (
-                            <div className={styles.audioSection}>
-                                <div className={styles.audioPlayerContainer}>
-                                    <audio
-                                        ref={audioRef}
-                                        src={audioPath}
-                                        controls
-                                        className={styles.audioPlayer}
-                                    />
-                                </div>
-                                <div className={styles.buttons}>
-                                    <button
-                                        className={styles.button}
-                                        onClick={playPauseAudio}
-                                        disabled={isLoading}
-                                    >
-                                        <FontAwesomeIcon
-                                            icon={isPlaying ? faPause : faPlay}
-                                        />
-                                        {isPlaying ? "Pause" : "Play"}
-                                    </button>
-                                    <button
-                                        className={styles.button}
-                                        onClick={stopAudio}
-                                        disabled={isLoading}
-                                    >
-                                        <FontAwesomeIcon icon={faStop} />
-                                        Stop
-                                    </button>
-                                    <button
-                                        className={styles.button}
-                                        onClick={downloadMusic}
-                                        disabled={isLoading}
-                                    >
-                                        <FontAwesomeIcon icon={faSave} />
-                                        Download
-                                    </button>
-                                </div>
+                            <div className={styles.audioControls}>
+                                <audio ref={audioRef} src={audioPath} />
+                                <button
+                                    onClick={playPauseAudio}
+                                    className={styles.playPauseButton}
+                                    disabled={isLoading}
+                                >
+                                    {isPlaying ? (
+                                        <>
+                                            <FontAwesomeIcon icon={faPause} />
+                                            Pause
+                                        </>
+                                    ) : (
+                                        <>
+                                            <FontAwesomeIcon icon={faPlay} />
+                                            Play
+                                        </>
+                                    )}
+                                </button>
+                                <button
+                                    onClick={stopAudio}
+                                    className={styles.stopButton}
+                                    disabled={isLoading}
+                                >
+                                    <FontAwesomeIcon icon={faStop} />
+                                    Stop
+                                </button>
                             </div>
                         )}
-                        {/* <div className={styles.signOut}>
-                            <button
-                                className={styles.signOutButton}
-                                onClick={handleSignOut}
-                            >
-                                <FontAwesomeIcon icon={faSignOutAlt} />
-                                Sign Out
-                            </button>
-                        </div> */}
+
+                        {/* Download */}
+                        <div className={styles.downloadButtonContainer}>
+                            {audioPath && (
+                                <button
+                                    onClick={downloadMusic}
+                                    disabled={isLoading}
+                                    className={styles.downloadButton}
+                                >
+                                    {isLoading ? (
+                                        <>
+                                            <FontAwesomeIcon
+                                                icon={faSpinner}
+                                                spin
+                                                className="mr-2"
+                                            />
+                                            Downloading...
+                                        </>
+                                    ) : (
+                                        <>
+                                            <FontAwesomeIcon
+                                                icon={faSave}
+                                                className="mr-2"
+                                            />
+                                            Download Music
+                                        </>
+                                    )}
+                                </button>
+                            )}
+                        </div>
+                    </div>
+
+                    <div className={styles.signOutContainer}>
+                        <button
+                            onClick={handleSignOut}
+                            className={styles.signOutButton}
+                        >
+                            <FontAwesomeIcon icon={faSignOutAlt} />
+                            Sign Out
+                        </button>
                     </div>
                 </div>
             </div>
