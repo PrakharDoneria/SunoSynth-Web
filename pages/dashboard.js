@@ -79,11 +79,10 @@ const DashboardPage = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ uid: user.uid, amount: credits + amount }),
+        body: JSON.stringify({ uid: user.uid, amount: amount }), // Pass the change in credits
       });
 
       if (response.ok) {
-        setCredits(credits + amount);
         await loadCredits(); // Reload credits after update
       } else {
         toast.error("Failed to update credits.");
@@ -94,8 +93,8 @@ const DashboardPage = () => {
   };
 
   const generateMusic = async () => {
-    if (credits < 5) {
-      toast.error("Not enough credits! You need 5 credits");
+    if (credits < 10) {
+      toast.error("Not enough credits! You need 10 credits");
       return;
     }
     if (!title || !lyrics) {
@@ -132,12 +131,11 @@ const DashboardPage = () => {
           style: selectedStyle === "Custom" ? customStyle : selectedStyle,
         }),
       });
-
+      await updateCredits(10); // Deduct 10 credits
       if (response.ok) {
         const blob = await response.blob();
         const url = URL.createObjectURL(blob);
         setAudioPath(url);
-        await updateCredits(-5);
         toast.success("Music generated successfully! 🎵");
       } else {
         const data = await response.json();
@@ -158,7 +156,7 @@ const DashboardPage = () => {
 
     setIsGeneratingLyrics(true);
     try {
-      await updateCredits(-5);
+      await updateCredits(5); // Deduct 5 credits *before* generation
       const baseUrl = process.env.NEXT_PUBLIC_SUNOSYNTH_VERCEL_API_URL;
       const response = await fetch(`${baseUrl}/generate`, {
         method: "POST",
@@ -174,14 +172,14 @@ const DashboardPage = () => {
         setLyricsCharacterCount(data.response.length || 0);
         toast.success("AI Lyrics generated successfully! 🎶");
       } else {
-        await updateCredits(5);
+        await updateCredits(5); // Add credits back on failure
         const data = await response.json();
         toast.error(
           `Failed to generate AI lyrics: ${data.message || "Unknown error"}`,
         );
       }
     } catch (error) {
-      await updateCredits(5);
+      await updateCredits(5); // Add credits back on failure
       toast.error(`Error generating AI lyrics: ${error.message}`);
     } finally {
       setIsGeneratingLyrics(false);
@@ -232,7 +230,7 @@ const DashboardPage = () => {
 
     setIsLoading(true);
     try {
-      await updateCredits(-2);
+      await updateCredits(2); // Deduct 2 credits
 
       // Create a temporary link element
       const link = document.createElement("a");
@@ -416,7 +414,7 @@ const DashboardPage = () => {
                 ) : (
                   <>
                     <FontAwesomeIcon icon={faMusic} className="mr-2" />
-                    Generate Music (5 Credits)
+                    Generate Music (10 Credits)
                   </>
                 )}
               </button>
