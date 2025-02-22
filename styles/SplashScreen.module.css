@@ -1,10 +1,12 @@
+/* SplashScreen.module.css - UPDATED for dark theme */
+
 .container {
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0f0f0;
+  background-color: #111827; /* Very dark gray background (dashboard) */
 }
 
 .splashScreen {
@@ -17,11 +19,11 @@
 .logo {
   font-size: 48px;
   font-weight: bold;
-  color: #333;
+  color: #f3f4f6; /* Light gray text color (dashboard) */
   margin-right: 20px; /* Adjusted margin for horizontal spacing */
 }
 
 .error {
   font-size: 18px;
-  color: #666;
+  color: #9ca3af; /* Light gray label color (dashboard) */
 }

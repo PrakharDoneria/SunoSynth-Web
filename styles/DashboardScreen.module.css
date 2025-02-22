@@ -1,312 +1,352 @@
+/* styles/DashboardScreen.module.css */
+
+/* ================= General Layout and Background ================= */
 .background {
-  background: linear-gradient(to bottom right, #f3e5f5, #e3f2fd);
-  min-height: 100vh;
-  padding: 48px 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    background-color: #111827; /* Very dark gray background */
+    min-height: 100vh;
+    width: 100%;
+    padding: 24px; /* Reduced padding */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto; /* Enable scrolling if content overflows */
 }
 
 .container {
-  max-width: 960px;
-  width: 100%;
-  background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-  overflow: hidden;
-  position: relative;
-  padding: 24px;
-}
-
-.topBar {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+    width: 100%;
+    max-width: 1200px; /* Wider max-width for larger screens */
+    padding: 32px; /* Reduced padding */
+    background-color: #1f2937; /* Slightly lighter dark gray for container */
+    border-radius: 16px; /* Reduced border radius */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #f3f4f6; /* Light gray text color */
 }
 
 .content {
-  padding: 24px;
+    width: 100%;
+    max-width: 1024px; /* Content max-width */
 }
 
+/* ================= Typography ================= */
 .heading {
-  font-size: 2.25rem;
-  font-weight: 800;
-  color: #1f2937;
-  margin-bottom: 16px;
-  text-align: center;
+    font-size: 2.5rem; /* Slightly smaller heading */
+    font-weight: 700;
+    color: #fff; /* White heading */
+    margin-bottom: 24px;
+    text-align: center;
+    letter-spacing: -0.025em; /* Adjust letter spacing */
 }
 
+/* ================= Credit Display ================= */
 .credits {
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
 }
 
 .creditLabel {
-  font-weight: 500;
-  color: #4b5563;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #9ca3af; /* Light gray label color */
 }
 
 .creditValue {
-  font-weight: 700;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff; /* White credit value */
 }
 
 .textGreen500 {
-  color: #16a34a;
+    color: #6ee7b7; /* Teal green */
 }
 
 .textYellow500 {
-  color: #eab308;
+    color: #fcd34d; /* Yellow */
 }
 
 .textRed500 {
-  color: #dc2626;
+    color: #f87171; /* Red */
 }
 
+/* ================= Form Styles ================= */
 .form {
-  margin-bottom: 32px;
+    margin-bottom: 48px;
 }
 
 .formGroup {
-  margin-bottom: 16px;
+    margin-bottom: 24px;
 }
 
 .label {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #4b5563;
-  margin-bottom: 4px;
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #d1d5db; /* Light gray label color */
+    margin-bottom: 6px;
 }
 
 .input,
 .select,
 .textarea {
-  display: block;
-  width: 100%;
-  font-size: 0.875rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
-  padding: 0.5rem 0.75rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px; /* Reduced border radius */
+    padding: 0.75rem 1rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3); /* Inset shadow */
+    transition: box-shadow 0.3s ease-in-out;
+    background-color: #374151; /* Dark gray input background */
+    color: #f3f4f6; /* Light gray input text */
 }
 
 .input:focus,
 .select:focus,
 .textarea:focus {
-  outline: none;
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+    outline: none;
+    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.5); /* More pronounced inset shadow */
 }
 
 .textarea {
-  resize: vertical;
+    resize: vertical;
+    min-height: 120px;
 }
 
+/* ================= Lyrics Generation ================= */
 .lyricsContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
 .generateLyricsButton {
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #fff;
-  background-color: #6366f1;
-  border-radius: 0.375rem;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: #4f46e5; /* Darker purple */
+    border-radius: 8px; /* Reduced border radius */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .generateLyricsButton:hover {
-  background-color: #4f46e5;
+    background-color: #4338ca; /* Even darker purple */
+    transform: translateY(-2px);
 }
 
 .characterCount {
-  font-size: 0.75rem;
-  color: #6b7280;
-  margin-top: 4px;
+    font-size: 0.75rem;
+    color: #9ca3af;
+    margin-top: 4px;
 }
 
+/* ================= Main Generate Button ================= */
 .generateButtonContainer {
-  margin-top: 24px;
-  display: flex;
-  justify-content: center;
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
 }
 
 .generateButton {
-  width: 100%;
-  max-width: 300px;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  background-color: #6366f1;
-  border-radius: 0.5rem;
-  transition: background-color 0.2s ease;
-  cursor: pointer;
-  text-align: center;
-  border: none;
+    width: 100%;
+    max-width: 360px;
+    padding: 1rem 1.5rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #fff;
+    background-color: #10b981;
+    border-radius: 8px; /* Reduced border radius */
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow */
 }
 
 .generateButton:hover {
-  background-color: #4f46e5;
+    background-color: #06b47e;
+    transform: translateY(-2px);
 }
 
-.audioSection {
-  margin-top: 24px;
-  text-align: center;
+/* ================= Audio Player Styles ================= */
+.audioContainer {
+    margin-top: 32px;
+    text-align: center;
 }
 
-.audioControls {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 0.5rem;
+.customAudioPlayer {
+    background-color: #2d3748; /* Darker gray audio player */
+    border-radius: 8px; /* Reduced border radius */
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    width: 100%;
+    max-width: 480px; /* Adjust as needed */
+    margin: 0 auto;
 }
 
-.audioPlayer {
-  width: 100%;
-  margin-top: 10px;
+.controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 16px;
 }
 
-.playPauseButton,
-.stopButton,
+.controlButton {
+    background-color: #4f46e5; /* Darker purple */
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px; /* Reduced border radius */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+    font-size: 1rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+.controlButton:hover {
+    background-color: #4338ca;
+    transform: translateY(-1px);
+}
+
 .downloadButton {
-  padding: 0.5rem 1rem;
-  font-weight: bold;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  border: none;
-  color: white;
-  font-size: 0.875rem;
-}
-
-.downloadButton {
-  background-color: #10b981;
+    background-color: #3b82f6; /* Sky blue */
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px; /* Reduced border radius */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Subtle shadow */
 }
 
 .downloadButton:hover {
-  background-color: #059669;
+    background-color: #2563eb;
+    transform: translateY(-1px);
 }
 
-.playPauseButton {
-  background-color: #22c55e;
+.downloadButton:disabled {
+    background-color: #6b7280; /* Grayed out when disabled */
+    cursor: not-allowed;
+    box-shadow: none;
 }
 
-.playPauseButton:hover {
-  background-color: #16a34a;
+.downloadButton:disabled:hover {
+    background-color: #6b7280;
+    transform: none;
 }
 
-.stopButton {
-  background-color: #ef4444;
-}
-
-.stopButton:hover {
-  background-color: #b91c1c;
-}
-
+/* ================= Sign Out and App Download ================= */
+.downloadAppButtonContainer,
 .signOutContainer {
-  text-align: center;
-  margin-top: 20px;
+    margin-top: 48px;
+    text-align: center;
 }
 
+.downloadAppButton,
 .signOutButton {
-  width: 100%;
-  max-width: 300px;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #fff;
-  background-color: #ef4444;
-  transition: background-color 0.2s;
-  cursor: pointer;
-  border: none;
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: #fff;
+    background-color: #374151; /* Dark gray */
+    border-radius: 8px; /* Reduced border radius */
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    text-align: center;
+    border: none;
+    max-width: 360px;
+    margin: 0 auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow */
 }
 
+.downloadAppButton:hover,
 .signOutButton:hover {
-  background-color: #dc2626;
+    background-color: #1f2937;
+    transform: translateY(-2px);
 }
 
+/* ================= Responsive adjustments ================= */
+@media (max-width: 768px) {
+    .container {
+        padding: 16px;
+    }
+
+    .heading {
+        font-size: 2rem;
+        margin-bottom: 16px;
+    }
+
+    .credits {
+        margin-bottom: 24px;
+    }
+
+    .formGroup {
+        margin-bottom: 16px;
+    }
+
+    .generateButton,
+    .downloadAppButton,
+    .signOutButton {
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .audioContainer {
+        margin-top: 24px;
+    }
+
+    .customAudioPlayer {
+        padding: 12px;
+    }
+
+    .controlButton,
+    .downloadButton {
+        font-size: 0.875rem;
+        padding: 6px 10px;
+    }
+
+    .downloadAppButtonContainer,
+    .signOutContainer {
+        margin-top: 32px;
+    }
+}
+
+/* ================= Top Bar (if used) ================= */
+.topBar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* ================= Get More Credits Button (if used) ================= */
 .getMoreCreditsButton {
-  display: block;
-  padding: 0.75rem 1.5rem;
-  background-color: #34d399;
-  color: #fff;
-  font-weight: 600;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-  text-align: center;
-  margin: 1rem auto 0;
-  max-width: 250px;
-  font-size: 0.875rem;
+    display: block;
+    padding: 0.75rem 1rem;
+    background-color: #3b82f6; /* Sky blue */
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+    text-align: center;
+    margin: 1.5rem auto 0;
+    max-width: 360px;
+    font-size: 1rem;
 }
 
 .getMoreCreditsButton:hover {
-  background-color: #2dd4bf;
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 16px;
-  }
-
-  .heading {
-    font-size: 1.75rem;
-  }
-
-  .generateButton {
-    font-size: 0.875rem;
-  }
-
-  .playPauseButton,
-  .stopButton,
-  .downloadButton {
-    font-size: 0.75rem;
-    padding: 0.375rem 0.75rem;
-  }
-
-  .signOutButton,
-  .getMoreCreditsButton {
-    font-size: 0.75rem;
-    padding: 0.5rem 1rem;
-  }
-}
-
-.downloadAppButtonContainer {
-  margin-top: 24px;
-  text-align: center;
-}
-
-.downloadAppButton {
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
-  font-size: 1rem;
-  color: #fff;
-  background-color: #2563eb;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  text-align: center;
-  border: none;
-  max-width: 300px;
-  margin: 0 auto;
-}
-
-.downloadAppButton:hover {
-  background-color: #1d4ed8;
-}
-
-@media (max-width: 768px) {
-  .downloadAppButton {
-    font-size: 0.875rem;
-    padding: 0.5rem 1rem;
-  }
+    background-color: #2563eb;
+    transform: translateY(-2px);
 }

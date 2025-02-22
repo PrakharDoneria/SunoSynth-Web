@@ -86,7 +86,7 @@ const LoginPage = () => {
             >
                 <div className={styles.iconContainer}>
                     <FontAwesomeIcon icon="lock" className={styles.lockIcon} />
-                    <svg
+                    {/* <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -99,7 +99,7 @@ const LoginPage = () => {
                             strokeLinejoin="round"
                             d="M16.5 10.5V6.75a3 3 0 00-3-3H7.5a3 3 0 00-3 3v10.5a3 3 0 003 3h7.5a3 3 0 003-3V13.5m-3 0h3m-3 0h-3"
                         />
-                    </svg>
+                    </svg> */}
                 </div>
                 <h2 className={styles.heading}>Welcome back</h2>
                 <p className={styles.subheading}>
