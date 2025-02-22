@@ -87,10 +87,9 @@ const DashboardPage = () => {
             const user = auth.currentUser;
             const baseUrl = process.env.NEXT_PUBLIC_SUNOSYNTH_API_URL;
             const response = await fetch(`${baseUrl}/credits/deduce`, {
-                // Changed endpoint to /deduce
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ uid: user.uid, amount }), // Pass as JSON body
+                body: JSON.stringify({ uid: user.uid, amount }),
             });
             if (response.ok) {
                 const data = await response.json();
@@ -309,7 +308,7 @@ const DashboardPage = () => {
                     <div className={styles.content}>
                         <h1 className={styles.heading}>
                             <FontAwesomeIcon icon={faMusic} className="mr-2" />
-                            SunoSynth Dashboard
+                            SunoSynth
                         </h1>
                         <div className={styles.credits}>
                             <span className={styles.creditLabel}>Credits:</span>
@@ -451,7 +450,7 @@ const DashboardPage = () => {
                                 ) : (
                                     <>
                                         <FontAwesomeIcon
-                                            icon={faMusic}
+                                            icon={faPlay}
                                             className="mr-2"
                                         />
                                         Generate Music
@@ -459,78 +458,67 @@ const DashboardPage = () => {
                                 )}
                             </button>
                         </div>
-
-                        {/* Audio Controls */}
-                        {audioPath && (
-                            <div className={styles.audioControls}>
-                                <audio ref={audioRef} src={audioPath} />
-                                <button
-                                    onClick={playPauseAudio}
-                                    className={styles.playPauseButton}
-                                    disabled={isLoading}
-                                >
-                                    {isPlaying ? (
-                                        <>
-                                            <FontAwesomeIcon icon={faPause} />
-                                            Pause
-                                        </>
-                                    ) : (
-                                        <>
-                                            <FontAwesomeIcon icon={faPlay} />
-                                            Play
-                                        </>
-                                    )}
-                                </button>
-                                <button
-                                    onClick={stopAudio}
-                                    className={styles.stopButton}
-                                    disabled={isLoading}
-                                >
-                                    <FontAwesomeIcon icon={faStop} />
-                                    Stop
-                                </button>
-                            </div>
-                        )}
-
-                        {/* Download */}
-                        <div className={styles.downloadButtonContainer}>
+                        <div className={styles.audioContainer}>
                             {audioPath && (
-                                <button
-                                    onClick={downloadMusic}
-                                    disabled={isLoading}
-                                    className={styles.downloadButton}
-                                >
-                                    {isLoading ? (
-                                        <>
+                                <div className={styles.audioPlayer}>
+                                    <audio
+                                        ref={audioRef}
+                                        src={audioPath}
+                                        controls
+                                        className={styles.audioElement}
+                                    />
+                                    <button
+                                        onClick={playPauseAudio}
+                                        className={styles.playPauseButton}
+                                    >
+                                        {isPlaying ? (
+                                            <FontAwesomeIcon icon={faPause} />
+                                        ) : (
+                                            <FontAwesomeIcon icon={faPlay} />
+                                        )}
+                                    </button>
+                                    <button
+                                        onClick={stopAudio}
+                                        className={styles.stopButton}
+                                    >
+                                        <FontAwesomeIcon icon={faStop} />
+                                    </button>
+                                    <button
+                                        onClick={downloadMusic}
+                                        className={styles.downloadButton}
+                                        disabled={isLoading}
+                                    >
+                                        {isLoading ? (
                                             <FontAwesomeIcon
                                                 icon={faSpinner}
                                                 spin
-                                                className="mr-2"
                                             />
-                                            Downloading...
-                                        </>
-                                    ) : (
-                                        <>
-                                            <FontAwesomeIcon
-                                                icon={faSave}
-                                                className="mr-2"
-                                            />
-                                            Download Music
-                                        </>
-                                    )}
-                                </button>
+                                        ) : (
+                                            <>
+                                                <FontAwesomeIcon
+                                                    icon={faSave}
+                                                    className="mr-2"
+                                                />
+                                                Download Music
+                                            </>
+                                        )}
+                                    </button>
+                                </div>
                             )}
                         </div>
-                    </div>
-
-                    <div className={styles.signOutContainer}>
-                        <button
-                            onClick={handleSignOut}
-                            className={styles.signOutButton}
-                        >
-                            <FontAwesomeIcon icon={faSignOutAlt} />
-                            Sign Out
-                        </button>
+                        <div className={styles.downloadAppButtonContainer}>
+                            <button
+                                onClick={() =>
+                                    window.open(
+                                        "https://play.google.com/store/apps/details?id=com.protecgames.sunosynth",
+                                        "_blank",
+                                    )
+                                }
+                                className={styles.downloadAppButton}
+                            >
+                                Download the App
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

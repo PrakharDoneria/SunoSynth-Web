@@ -253,7 +253,6 @@
   background-color: #2dd4bf;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .container {
     padding: 16px;
@@ -277,6 +276,37 @@
   .signOutButton,
   .getMoreCreditsButton {
     font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+.downloadAppButtonContainer {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.downloadAppButton {
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #2563eb;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-align: center;
+  border: none;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.downloadAppButton:hover {
+  background-color: #1d4ed8;
+}
+
+@media (max-width: 768px) {
+  .downloadAppButton {
+    font-size: 0.875rem;
     padding: 0.5rem 1rem;
   }
 }

@@ -9,7 +9,7 @@
 
 .splashScreen {
   display: flex;
-  flex-direction: column;
+  flex-direction: row; /* Change column to row */
   align-items: center;
   transition: opacity 0.5s ease-in-out;
 }
@@ -18,15 +18,10 @@
   font-size: 48px;
   font-weight: bold;
   color: #333;
-  margin-bottom: 20px;
-}
-
-.logo span {
-  display: block;
+  margin-right: 20px; /* Adjusted margin for horizontal spacing */
 }
 
 .error {
-  margin-top: 20px;
   font-size: 18px;
   color: #666;
 }
