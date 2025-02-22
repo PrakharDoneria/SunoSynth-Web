@@ -1,25 +1,23 @@
-/* styles/DashboardScreen.module.css */
-
 .background {
-  background: linear-gradient(to bottom right, #f3e5f5, #e3f2fd); /* Purple-50 to Blue-100 */
+  background: linear-gradient(to bottom right, #f3e5f5, #e3f2fd);
   min-height: 100vh;
   padding: 48px 16px;
 }
 
 .container {
-  max-width: 960px; /* Adjusted max-width */
+  max-width: 960px;
   margin: 0 auto;
   background-color: #fff;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   border-radius: 16px;
   overflow: hidden;
-  position: relative; /* Required for positioning topBar content */
+  position: relative;
 }
 
 .topBar {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .content {
@@ -27,9 +25,9 @@
 }
 
 .heading {
-  font-size: 2.25rem; /* Equivalent to text-3xl */
-  font-weight: 800; /* Equivalent to font-extrabold */
-  color: #1f2937;   /* Equivalent to text-gray-900 */
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #1f2937;
   margin-bottom: 16px;
 }
 
@@ -37,30 +35,30 @@
   margin-bottom: 24px;
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Align items to the start */
-  gap: 10px; /* Space between items */
+  justify-content: flex-start;
+  gap: 10px;
 }
 
 .creditLabel {
-  font-weight: 500; /* Equivalent to font-medium */
-  color: #4b5563;   /* Equivalent to text-gray-700 */
+  font-weight: 500;
+  color: #4b5563;
 }
 
 .creditValue {
-  font-weight: 700; /* Equivalent to font-bold */
+  font-weight: 700;
   margin-left: 8px;
 }
 
 .textGreen500 {
-  color: #16a34a; /* green-500 */
+  color: #16a34a;
 }
 
 .textYellow500 {
-  color: #eab308; /* yellow-500 */
+  color: #eab308;
 }
 
 .textRed500 {
-  color: #dc2626; /* red-500 */
+  color: #dc2626;
 }
 
 .form {
@@ -73,36 +71,34 @@
 
 .label {
   display: block;
-  font-size: 0.875rem; /* Equivalent to text-sm */
-  font-weight: 500; /* Equivalent to font-medium */
-  color: #4b5563;   /* Equivalent to text-gray-700 */
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4b5563;
   margin-bottom: 4px;
 }
 
 .input,
 .select,
 .textarea {
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);  /* Equivalent to shadow-sm */
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   display: block;
   width: 100%;
-  font-size: 0.875rem; /* Equivalent to text-sm */
-  border: 1px solid #d1d5db; /* Equivalent to border-gray-300 */
-  border-radius: 0.375rem; /* Equivalent to rounded-md */
+  font-size: 0.875rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
   padding: 0.5rem 0.75rem;
 }
 
-/*Add focus styles using standard CSS*/
 .input:focus,
 .select:focus,
 .textarea:focus {
-  outline: none; /* Remove the default outline */
-  border-color: #6366f1; /* indigo-500 */
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3); /* Adds a subtle ring */
-
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
 }
 
 .textarea {
-    resize: vertical; /*Allows vertical resizing*/
+  resize: vertical;
 }
 
 .lyricsContainer {
@@ -112,24 +108,24 @@
 }
 
 .generateLyricsButton {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #fff;
-    background-color: #6366f1; /* indigo-600 */
-    border-radius: 0.375rem;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: #6366f1;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .generateLyricsButton:hover {
-    background-color: #4f46e5; /* indigo-700 */
+  background-color: #4f46e5;
 }
 
 .characterCount {
-  font-size: 0.75rem; /* Equivalent to text-xs */
-  color: #6b7280;   /* Equivalent to text-gray-500 */
+  font-size: 0.75rem;
+  color: #6b7280;
   margin-top: 4px;
 }
 
@@ -147,13 +143,13 @@
   font-size: 0.875rem;
   font-weight: 500;
   color: #fff;
-  background-color: #6366f1; /* indigo-600 */
+  background-color: #6366f1;
   transition: background-color 0.2s;
   cursor: pointer;
 }
 
 .generateButton:hover {
-  background-color: #4f46e5; /* indigo-700 */
+  background-color: #4f46e5;
 }
 
 .audioSection {
@@ -161,66 +157,64 @@
 }
 
 .audioControls {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 0.5rem;
-
+  display: flex;
+  justify-content: space-around;
+  margin-top: 0.5rem;
 }
 
 .audioPlayer {
-  width: 100%; /* Make the audio player responsive */
-  margin-top: 10px
+  width: 100%;
+  margin-top: 10px;
 }
 
 .audioPlayerContainer {
-  /* Add any specific styles here if you need to customize */
 }
 
 .playPauseButton,
-.stopButton{
-    padding: 0.375rem 0.75rem;
-    font-weight: bold;
-    border-radius: 0.25rem; /*rounded*/
-    cursor: pointer;
-    border: none;
-    color: white;
-    font-size: 0.75rem;
-}
-
-.downloadButton{
+.stopButton {
   padding: 0.375rem 0.75rem;
   font-weight: bold;
-  border-radius: 0.25rem; /*rounded*/
+  border-radius: 0.25rem;
   cursor: pointer;
   border: none;
   color: white;
-  font-size: 0.75rem; /*Smaller font size*/
-  background-color: #10b981; /* green-600 */
+  font-size: 0.75rem;
+}
+
+.downloadButton {
+  padding: 0.375rem 0.75rem;
+  font-weight: bold;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  border: none;
+  color: white;
+  font-size: 0.75rem;
+  background-color: #10b981;
   transition: background-color 0.2s;
 }
 
 .playPauseButton {
-    background-color: #22c55e; /*green-500*/
+  background-color: #22c55e;
 }
 
 .playPauseButton:hover {
-    background-color: #16a34a; /*green-700*/
+  background-color: #16a34a;
 }
 
 .stopButton {
-    background-color: #ef4444; /*red-500*/
+  background-color: #ef4444;
 }
 
 .stopButton:hover {
-    background-color: #b91c1c; /*red-700*/
+  background-color: #b91c1c;
 }
 
 .downloadButton:hover {
-    background-color: #059669; /* green-700 */
+  background-color: #059669;
 }
 
 .signOutContainer {
-  background-color: #f9fafb; /* gray-50 */
+  background-color: #f9fafb;
   padding: 12px 24px;
 }
 
@@ -234,31 +228,29 @@
   font-size: 0.875rem;
   font-weight: 500;
   color: #fff;
-  background-color: #ef4444; /* red-600 */
+  background-color: #ef4444;
   transition: background-color 0.2s;
   cursor: pointer;
 }
 
 .signOutButton:hover {
-  background-color: #dc2626; /* red-700 */
+  background-color: #dc2626;
 }
 
-/* Removed .topBar and its positioning */
-
 .getMoreCreditsButton {
-    display: block; /* Make it take full width */
-    padding: 0.5rem 1rem; /* Add some padding for better appearance */
-    background-color: #34d399; /* Teal-500 */
-    color: #fff;
-    font-weight: 600;
-    border-radius: 0.375rem; /* Rounded corners */
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-    text-align: center; /* Center the text */
-    margin-top: 1rem; /* Separate it from other content */
-    font-size: 0.875rem;
+  display: block;
+  padding: 0.5rem 1rem;
+  background-color: #34d399;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.875rem;
 }
 
 .getMoreCreditsButton:hover {
-    background-color: #2dd4bf; /* Teal-400 on hover */
+  background-color: #2dd4bf;
 }

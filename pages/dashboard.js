@@ -1,4 +1,3 @@
-// pages/dashboard.js
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { getAuth, signOut } from "firebase/auth";
@@ -34,7 +33,14 @@ const DashboardPage = () => {
     const audioRef = useRef(null);
     const router = useRouter();
 
-    const stylesArray = ["Hip-Hop", "Rock", "Pop", "Jazz", "Classical", "Custom"];
+    const stylesArray = [
+        "Hip-Hop",
+        "Rock",
+        "Pop",
+        "Jazz",
+        "Classical",
+        "Custom",
+    ];
 
     useEffect(() => {
         loadCredits();
@@ -49,7 +55,9 @@ const DashboardPage = () => {
                 return;
             }
             const baseUrl = process.env.NEXT_PUBLIC_SUNOSYNTH_API_URL;
-            const response = await fetch(`${baseUrl}/credits/fetch?uid=${user.uid}`);
+            const response = await fetch(
+                `${baseUrl}/credits/fetch?uid=${user.uid}`,
+            );
             if (response.ok) {
                 const data = await response.json();
                 if (data.success) {
@@ -64,7 +72,6 @@ const DashboardPage = () => {
             toast.error(`Error loading credits: ${error.message}`);
         }
     };
-
 
     const generateMusic = async () => {
         if (credits < 10) {
@@ -90,7 +97,7 @@ const DashboardPage = () => {
         }
 
         setIsLoading(true);
-        setAudioPath(null); //Clear the old audio
+        setAudioPath(null);
 
         try {
             const auth = getAuth();
@@ -103,10 +110,13 @@ const DashboardPage = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    uid: user.uid, // Include the UID
+                    uid: user.uid,
                     title: title,
                     lyrics: lyrics,
-                    style: selectedStyle === "Custom" ? customStyle : selectedStyle,
+                    style:
+                        selectedStyle === "Custom"
+                            ? customStyle
+                            : selectedStyle,
                 }),
             });
 
@@ -117,7 +127,9 @@ const DashboardPage = () => {
                 toast.success("Music generated successfully! 🎵");
             } else {
                 const data = await response.json();
-                toast.error(`Generation failed: ${data.message || "Unknown error"}`);
+                toast.error(
+                    `Generation failed: ${data.message || "Unknown error"}`,
+                );
             }
         } catch (error) {
             toast.error(`Error generating music: ${error.message}`);
@@ -128,7 +140,9 @@ const DashboardPage = () => {
 
     const generateLyrics = async (prompt) => {
         if (credits < 5) {
-            toast.error("Not enough credits! You need 5 credits to generate lyrics.");
+            toast.error(
+                "Not enough credits! You need 5 credits to generate lyrics.",
+            );
             return;
         }
 
@@ -265,7 +279,9 @@ const DashboardPage = () => {
                         </h1>
                         <div className={styles.credits}>
                             <span className={styles.creditLabel}>Credits:</span>
-                            <span className={`${styles.creditValue} ${getCreditColor()}`}>
+                            <span
+                                className={`${styles.creditValue} ${getCreditColor()}`}
+                            >
                                 {credits}
                             </span>
                         </div>
@@ -282,7 +298,9 @@ const DashboardPage = () => {
                                     value={title}
                                     onChange={(e) => {
                                         setTitle(e.target.value);
-                                        setTitleCharacterCount(e.target.value.length);
+                                        setTitleCharacterCount(
+                                            e.target.value.length,
+                                        );
                                     }}
                                     maxLength={30}
                                 />
@@ -291,7 +309,10 @@ const DashboardPage = () => {
                                 </p>
                             </div>
                             <div className={styles.formGroup}>
-                                <label htmlFor="lyrics" className={styles.label}>
+                                <label
+                                    htmlFor="lyrics"
+                                    className={styles.label}
+                                >
                                     Lyrics (Max 2000 characters)
                                 </label>
                                 <div className={styles.lyricsContainer}>
@@ -303,7 +324,9 @@ const DashboardPage = () => {
                                         value={lyrics}
                                         onChange={(e) => {
                                             setLyrics(e.target.value);
-                                            setLyricsCharacterCount(e.target.value.length);
+                                            setLyricsCharacterCount(
+                                                e.target.value.length,
+                                            );
                                         }}
                                         maxLength={2000}
                                     />
@@ -324,7 +347,10 @@ const DashboardPage = () => {
                                             </>
                                         ) : (
                                             <>
-                                                <FontAwesomeIcon icon={faFileAlt} className="mr-2" />
+                                                <FontAwesomeIcon
+                                                    icon={faFileAlt}
+                                                    className="mr-2"
+                                                />
                                                 Generate Lyrics
                                             </>
                                         )}
@@ -353,8 +379,12 @@ const DashboardPage = () => {
                             </div>
                             {selectedStyle === "Custom" && (
                                 <div className={styles.formGroup}>
-                                    <label htmlFor="custom-style" className={styles.label}>
-                                        Custom Style (e.g., India Bollywood, Romantic)
+                                    <label
+                                        htmlFor="custom-style"
+                                        className={styles.label}
+                                    >
+                                        Custom Style (e.g., India Bollywood,
+                                        Romantic)
                                     </label>
                                     <input
                                         type="text"
@@ -362,7 +392,9 @@ const DashboardPage = () => {
                                         className={styles.input}
                                         placeholder="Enter custom style"
                                         value={customStyle}
-                                        onChange={(e) => setCustomStyle(e.target.value)}
+                                        onChange={(e) =>
+                                            setCustomStyle(e.target.value)
+                                        }
                                     />
                                 </div>
                             )}
@@ -375,12 +407,19 @@ const DashboardPage = () => {
                             >
                                 {isLoading ? (
                                     <>
-                                        <FontAwesomeIcon icon={faSpinner} spin className="mr-2" />
+                                        <FontAwesomeIcon
+                                            icon={faSpinner}
+                                            spin
+                                            className="mr-2"
+                                        />
                                         Generating Music...
                                     </>
                                 ) : (
                                     <>
-                                        <FontAwesomeIcon icon={faMusic} className="mr-2" />
+                                        <FontAwesomeIcon
+                                            icon={faMusic}
+                                            className="mr-2"
+                                        />
                                         Generate Music (10 Credits)
                                     </>
                                 )}
@@ -396,65 +435,45 @@ const DashboardPage = () => {
                                         className={styles.audioPlayer}
                                     />
                                 </div>
-                                <div className={styles.audioControls}>
+                                <div className={styles.buttons}>
                                     <button
-                                        className={styles.playPauseButton}
+                                        className={styles.button}
                                         onClick={playPauseAudio}
+                                        disabled={isLoading}
                                     >
-                                        {isPlaying ? (
-                                            <>
-                                                <FontAwesomeIcon icon={faPause} className="mr-2" />
-                                                Pause
-                                            </>
-                                        ) : (
-                                            <>
-                                                <FontAwesomeIcon icon={faPlay} className="mr-2" />
-                                                Play
-                                            </>
-                                        )}
+                                        <FontAwesomeIcon
+                                            icon={isPlaying ? faPause : faPlay}
+                                        />
+                                        {isPlaying ? "Pause" : "Play"}
                                     </button>
-                                    <button className={styles.stopButton} onClick={stopAudio}>
-                                        <FontAwesomeIcon icon={faStop} className="mr-2" />
+                                    <button
+                                        className={styles.button}
+                                        onClick={stopAudio}
+                                        disabled={isLoading}
+                                    >
+                                        <FontAwesomeIcon icon={faStop} />
                                         Stop
                                     </button>
                                     <button
-                                        className={styles.downloadButton}
+                                        className={styles.button}
                                         onClick={downloadMusic}
                                         disabled={isLoading}
                                     >
-                                        {isLoading ? (
-                                            <>
-                                                <FontAwesomeIcon
-                                                    icon={faSpinner}
-                                                    spin
-                                                    className="mr-2"
-                                                />
-                                                Downloading...
-                                            </>
-                                        ) : (
-                                            <>
-                                                <FontAwesomeIcon icon={faSave} className="mr-2" />
-                                                Download Music (2 Credits)
-                                            </>
-                                        )}
+                                        <FontAwesomeIcon icon={faSave} />
+                                        Download
                                     </button>
                                 </div>
                             </div>
                         )}
-                        <a
-                            href="https://play.google.com/store/apps/details?id=com.protecgames.sunosynth"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={styles.getMoreCreditsButton}
-                        >
-                            Get More Credits
-                        </a>
-                    </div>
-                    <div className={styles.signOutContainer}>
-                        <button onClick={handleSignOut} className={styles.signOutButton}>
-                            <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
-                            Sign Out
-                        </button>
+                        {/* <div className={styles.signOut}>
+                            <button
+                                className={styles.signOutButton}
+                                onClick={handleSignOut}
+                            >
+                                <FontAwesomeIcon icon={faSignOutAlt} />
+                                Sign Out
+                            </button>
+                        </div> */}
                     </div>
                 </div>
             </div>
