@@ -74,7 +74,7 @@ const DashboardPage = () => {
         return;
       }
       const baseUrl = process.env.NEXT_PUBLIC_SUNOSYNTH_API_URL;
-      const response = await fetch(`${baseUrl}/credits/save`, {
+      const response = await fetch(`${baseUrl}/credits/deduce`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
